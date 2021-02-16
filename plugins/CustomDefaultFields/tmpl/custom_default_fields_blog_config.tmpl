@@ -1,0 +1,173 @@
+<mt:SetVar name="true" value="1" />
+<script>
+function CDFNoToggleSubPrefs(c) {
+    jQuery("#" + (c.name || c.id) + "-prefs").toggleClass("d-none");
+    return false;
+}
+</script>
+
+<p style="border-bottom: 1px solid #ccc;"><__trans phrase="Settings about entry."></p>
+
+<mtapp:setting
+	id="hide_title"
+	label="<__trans phrase="Hide title field.">"
+>
+
+<input type="checkbox" name="hide_title" id="hide_title" value="1" <mt:if var="hide_title">checked="checked"</mt:if> onclick="CDFNoToggleSubPrefs(this)" />
+</li>
+
+</mtapp:setting>
+
+<div id="hide_title-prefs" class="<mt:If var="hide_title" eq="1">d-none</mt:if>">
+<mtapp:setting
+	id="title_is_textarea"
+	label="<__trans phrase="Make title field TEXTAREA.">"
+>
+
+<ul>
+
+<li>
+<input type="checkbox" name="title_is_textarea" id="title_is_textarea" value="1" <mt:if var="title_is_textarea">checked="checked"</mt:if> onclick="CDFNoToggleSubPrefs(this)" />
+</li>
+
+</ul>
+
+</mtapp:setting>
+
+<div id="title_is_textarea-prefs" class="<mt:Unless var="title_is_textarea" eq="1">d-none</mt:Unless>">
+<mtapp:setting
+	id="title_textarea_rows"
+	label="<__trans phrase="Title TEXTAREA field&#036;s rows.">"
+>
+
+<ul>
+
+<li>
+<input name="title_textarea_rows" id="title_textarea_rows" size="2" value="<mt:var name="title_textarea_rows">" />
+</li>
+
+</ul>
+
+</mtapp:setting>
+</div>
+
+</div>
+
+<mtapp:setting
+	id="hide_body"
+	label="<__trans phrase="Hide body field.">"
+>
+
+<ul>
+
+<li>
+<input type="checkbox" name="hide_body" id="hide_body" value="1" <mt:if var="hide_body">checked="checked"</mt:if> onclick="CDFNoToggleSubPrefs(this)" />
+</li>
+
+</ul>
+
+</mtapp:setting>
+
+<div id="hide_body-prefs" class="<mt:If var="hide_body" eq="1">d-none</mt:if>">
+
+<mtapp:setting
+	id="hide_extended"
+	label="<__trans phrase="Hide extended field.">"
+>
+
+<ul>
+
+<li>
+<input type="checkbox" name="hide_extended" id="hide_extended" value="1" <mt:if var="hide_extended">checked="checked"</mt:if> onclick="CDFNoToggleSubPrefs(this)" />
+</li>
+
+</ul>
+
+</mtapp:setting>
+
+</div>
+
+<p style="border-bottom: 1px solid #ccc;"><__trans phrase="Settings about webpage."></p>
+<mtapp:setting
+	id="page_hide_title"
+	label="<__trans phrase="Hide title field.">"
+>
+
+<ul>
+
+<li>
+<input type="checkbox" name="page_hide_title" id="page_hide_title" value="1" <mt:if var="page_hide_title">checked="checked"</mt:if> onclick="CDFNoToggleSubPrefs(this)" />
+</li>
+
+</ul>
+
+</mtapp:setting>
+
+<div id="page_hide_title-prefs" class="<mt:If var="page_hide_title" eq="1">d-none</mt:if>">
+<mtapp:setting
+	id="page_title_is_textarea"
+	label="<__trans phrase="Make title field TEXTAREA.">"
+>
+
+<ul>
+
+<li>
+<input type="checkbox" name="page_title_is_textarea" id="page_title_is_textarea" value="1" <mt:if var="page_title_is_textarea">checked="checked"</mt:if> onclick="CDFNoToggleSubPrefs(this)" />
+</li>
+
+</ul>
+
+</mtapp:setting>
+
+<div id="page_title_is_textarea-prefs" class="<mt:Unless var="page_title_is_textarea" eq="1">d-none</mt:Unless>">
+<mtapp:setting
+	id="page_title_textarea_rows"
+	label="<__trans phrase="Title TEXTAREA field&#036;s rows.">"
+>
+
+<ul>
+
+<li>
+<input name="page_title_textarea_rows" id="page_title_textarea_rows" size="2" value="<mt:var name="page_title_textarea_rows">" />
+</li>
+
+</ul>
+
+</mtapp:setting>
+</div>
+
+</div>
+
+<mtapp:setting
+	id="page_hide_body"
+	label="<__trans phrase="Hide body field.">"
+>
+
+<ul>
+
+<li>
+<input type="checkbox" name="page_hide_body" id="page_hide_body" value="1" <mt:if var="page_hide_body">checked="checked"</mt:if> onclick="CDFNoToggleSubPrefs(this)" />
+</li>
+
+</ul>
+
+</mtapp:setting>
+
+<div id="page_hide_body-prefs" class="<mt:If var="page_hide_body" eq="1">d-none</mt:if>">
+
+<mtapp:setting
+	id="page_hide_extended"
+	label="<__trans phrase="Hide extended field.">"
+>
+
+<ul>
+
+<li>
+<input type="checkbox" name="page_hide_extended" id="page_hide_extended" value="1" <mt:if var="page_hide_extended">checked="checked"</mt:if> onclick="CDFNoToggleSubPrefs(this)" />
+</li>
+
+</ul>
+
+</mtapp:setting>
+
+</div>

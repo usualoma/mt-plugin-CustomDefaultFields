@@ -1,0 +1,32 @@
+#plugin name
+name: CustomDefaultFields
+version: 0.3.0
+
+#about this plugin
+description: <__trans phrase="Customizing default field.">
+author_name: Taku Amano
+author_link: http://taaas.jp/
+
+#Localization
+l10n_class: CustomDefaultFields::L10N
+
+#system_config_template: system_config.tmpl
+blog_config_template: custom_default_fields_blog_config.tmpl
+
+settings:
+    hide_title:
+    hide_body:
+    hide_extended:
+
+    title_is_textarea:
+    title_textarea_rows:
+
+    page_hide_title:
+    page_hide_body:
+    page_hide_extended:
+
+    page_title_is_textarea:
+    page_title_textarea_rows:
+
+callbacks:
+    MT::App::CMS::template_source.edit_entry: CustomDefaultFields::App::source_edit_entry

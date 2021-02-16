@@ -61,9 +61,6 @@ sub source_edit_entry {
 __EOH__
 	}
 	else {
-		if (my $label = $hash->{'title_label'}) {
-			$$tmpl =~ s/<__trans phrase="Title">/$label/g;
-		}
 		if ($hash->{'title_is_textarea'}) {
 			my ($input) = ($$tmpl =~ m/(<input(.(?!\/>))*?id="title"(.(?!\/>))*?.\/>)/i);
 			my ($value) = ($input =~ m/value="([^"]*)"/i);
@@ -91,36 +88,12 @@ __EOH__
 }
 __EOH__
 	}
-	else {
-		if (my $label = $hash->{'body_label'}) {
-			$$tmpl =~ s/<__trans phrase="Body">/$label/g;
-		}
-
-		if ($hash->{'hide_extended'}) {
-			$$tmpl =~ s/(<div[^>]*)(mt:tab="extended"(.|\r|\n)*?<\/div>)/$1 style="display: none" $2/si;
-		}
-		elsif (my $label = $hash->{'extended_label'}) {
-			$$tmpl =~ s/<__trans phrase="Extended">/$label/g;
-		}
-	}
-
-	if (my $label = $hash->{'excerpt_label'}) {
-		$$tmpl =~ s/<__trans phrase="Excerpt">/$label/g;
-	}
-
-	if (my $label = $hash->{'categories_label'}) {
-		$$tmpl =~ s/<__trans phrase="Categories">/$label/g;
-	}
-
-	{
-		my $height = $hash->{'category_selector_height'};
-		$height =~ s/^\s*|\s*$//g;
-		if ($height) {
-			if ($height =~ m/^\d+$/) {
-				$height .= 'px';
-			}
-			$style .= '.category-selector-list { height: ' . $height . ';}';
-		}
+	elsif ($hash->{'hide_extended'}) {
+		$style .= <<__EOH__;
+#editor-header > div:nth-child(2) {
+	visibility: hidden;
+}
+__EOH__
 	}
 
 	if ($style) {
@@ -130,37 +103,7 @@ $style
 </style>
 __EOH__
 
-		#$$tmpl .= $style;
-		my $replace = '<mt:?include[^>]*name="include/footer.tmpl"[^>]*>';
-		$$tmpl =~ s#$replace#$style$&#i;
-	}
-}
-
-sub param_edit_entry {
-	my ($cb, $app, $param, $tmpl) = @_;
-
-	my $plugin = MT->component('CustomDefaultFields');
-	my $blog_id = $app->param('blog_id') or return;
-	my $hash = $plugin->get_config_hash('blog:' . $blog_id) || {};
-
-	foreach my $f (@{ $param->{field_loop} }) {
-		my $name = lc($f->{'field_name'});
-		if (my $label = $hash->{$name . '_label'}) {
-			$f->{'field_label'} = $label if $label !~ m/^<__trans phrase/;
-		}
-	}
-}
-
-sub source_blog_config {
-	my ($cb, $app, $tmpl) = @_;
-	my $version = $MT::VERSION;
-
-	if ($version < 5) {
-		;
-	}
-	else {
-		$$tmpl =~ s/\$disable_title_field_label/1/gi;
-		$$tmpl =~ s/\$disable_category_selector_height/1/gi;
+		$$tmpl =~ s#(<mt:?setvarblock[^>]*name="html_head"[^>]*append="1"[^>]*>)#$1$style#i;
 	}
 }
 
